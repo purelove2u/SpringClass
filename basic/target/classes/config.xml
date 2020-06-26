@@ -5,5 +5,25 @@
 
 	<!-- 스프링에서 관리하는 객체 : bean  -->
 	<bean id="tv" class="com.spring.basic.SamsungTV"/>
-
+	
+	<!-- di에서 필요한 객체 -->
+	<!-- Setter Injection : set 메소드를 통한 주입 -->
+	<bean id="tv2" class="com.spring.di.SamsungTV">
+		<property name="speaker" ref="samsung"/>
+		<property name="price" value="300000"/>		
+	</bean>
+	
+	<!-- constructor Injection : constructor를 통한 주입 -->
+	<bean id="tv3" class="com.spring.di.LgTV">
+		<constructor-arg ref="samsung"/>
+		<constructor-arg value="200000"/>
+	</bean>
+	
+	<bean id="sony" class="com.spring.di.SonySpeaker"></bean>
+	<bean id="samsung" class="com.spring.di.SamsungSpeaker"></bean>
+	
+	<bean id="msg" class="com.spring.di.MessageBean">
+		<constructor-arg value="hong"></constructor-arg>
+		<constructor-arg value="Hello"></constructor-arg>
+	</bean>
 </beans>
