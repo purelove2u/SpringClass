@@ -13,6 +13,13 @@
 		font-size:14px;
 	}
 </style>
+<script>
+   	let msg = '${msg}';   
+   	if(msg === 'false'){
+   		alert('약관에 동의를 해주세요');
+   	}
+   	//console.log(msg);
+</script>
 </head>
 <body>
 <div class="container">
@@ -157,4 +164,12 @@
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
