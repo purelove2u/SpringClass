@@ -7,9 +7,12 @@
 		from(select /*+ INDEX_DESC(spring_board pk_spring_board) */
 		            rownum rn, bno, title, writer, regdate, updatedate
 		            from spring_board
-		            where bno>0 and rownum <=20)
-		where rn> 10;
+		            where bno>0 and rownum <= (#{pageNum}*#{amount}))
+		where rn> (#{pageNum}-1)*#{amount}
 		]]>
+	</select>
+	<select id="total" resultType="int">
+		select count(*) from spring_board where bno>0
 	</select>
 	<insert id="insert">
 		<selectKey keyProperty="bno" order="BEFORE" resultType="int">

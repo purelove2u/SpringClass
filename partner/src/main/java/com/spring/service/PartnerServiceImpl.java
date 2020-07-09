@@ -6,23 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.spring.domain.BoardVO;
-import com.spring.domain.Criteria;
-import com.spring.mapper.BoardMapper;
+import com.spring.domain.PartnerVO;
+import com.spring.mapper.PartnerMapper;
 
 @Service
-public class BoardServiceImpl implements BoardService {
+public class PartnerServiceImpl implements PartnerService {
 
 	@Autowired
-	private BoardMapper mapper;
+	private PartnerMapper mapper;
 	
 	@Override
-	public boolean insertBoard(BoardVO vo) {		
+	public boolean insertBoard(PartnerVO vo) {		
 		return mapper.insert(vo)==1?true:false;
 	}
 
 	@Override
-	public boolean updateBoard(BoardVO vo) {		
+	public boolean updateBoard(PartnerVO vo) {		
 		return mapper.update(vo)==1?true:false;
 	}
 
@@ -32,18 +31,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO getBoard(int bno) {		
+	public PartnerVO getBoard(int bno) {		
 		return mapper.read(bno);
 	}
 
 	@Override
-	public List<BoardVO> getList(Criteria cri) {		
-		return mapper.list(cri);
-	}
-
-	@Override
-	public int totalRows() {		
-		return mapper.total();
+	public List<PartnerVO> getList() {		
+		return mapper.list();
 	}
 
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BoardVO;
+import com.spring.domain.Criteria;
+import com.spring.domain.PageVO;
 import com.spring.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,9 +40,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(Model model,Criteria cri) {
 		log.info("list 요청");
-		model.addAttribute("list", service.getList());
+		//현재 페이지에 보여줄 게시물
+		model.addAttribute("list", service.getList(cri));
+		//하단의 페이지나누기와 관련된 정보
+		model.addAttribute("pageVO", new PageVO(cri, service.totalRows()));
 	}
 	
 	//내용보기

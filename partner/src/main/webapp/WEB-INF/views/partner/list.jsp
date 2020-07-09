@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../includes/header.jsp" %>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Board List</h1>
+                    <h1 class="page-header">Partner List</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -55,15 +53,9 @@
                             <!-- start Pagination -->
                             <div class="text-center">
                             	<ul class="pagination">
-                            	  <c:if test="${pageVO.prev}">
-                            		<li class="paginate_button previous"><a href="${pageVO.startPage-1}">Previous</a></li>
-                            	  </c:if>	
-                            	  <c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}">
-                            		<li class="paginate_button ${pageVO.cri.pageNum==idx?'active':''}"><a href="${idx}">${idx}</a></li>
-                            	  </c:forEach>	
-                            	  <c:if test="${pageVO.next}">
-                            		<li class="paginate_button next"><a href="${pageVO.endPage+1}">Next</a></li>
-                            	  </c:if>	
+                            		<li class="paginate_button previous"><a href="#">Previous</a>
+                            		<li><a href="#">1234</a>
+                            		<li class="paginate_button next"><a href="#">Next</a>
                             	</ul>
                             </div>
                             <!-- end Pagination -->   
@@ -74,11 +66,6 @@
                     </div>                   
                 </div>               
             <!-- /.row -->
-<%-- 페이지번호를 누르면 동작하는 폼 --%>
-<form action="list" id="actionForm">
-	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
-	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
-</form>
 <!-- 모달 추가 -->
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog">
@@ -116,18 +103,6 @@ $(function(){
 		}
 		$("#myModal").modal("show");
 	}
-	
-	// 사용자가 페이지 번호를 누르면 동작하는 스크립트
-	let actionForm = $("#actionForm");
-	$(".paginate_button a").click(function(e){
-		// a 태그의 동작 막기
-		e.preventDefault();
-	    // 전송해야 할 폼 가져온 후 pageNum 의 값과 amount 값을 변경한 후
-	    actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-	    // 폼 전송하기
-		actionForm.submit();
-	})
-	
 	
 })
 </script>
