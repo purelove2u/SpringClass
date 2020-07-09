@@ -18,10 +18,21 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public boolean regist(RegisterVO vo) {
 		log.info("회원가입 서비스 호출....");
-		return mapper.register(vo) > 0 ? true : false;
+		return mapper.register(vo) > 0 ? true: false;
 	}
+
 	@Override
-	public boolean dupId(String userid) {
-		return mapper.dupId(userid) > 0 ? false: true;
+	public boolean dupId(String userid) {		
+		return mapper.dupId(userid) > 0 ? false:true;
 	}
+
 }
+
+
+
+
+
+
+
+
+

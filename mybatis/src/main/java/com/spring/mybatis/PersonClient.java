@@ -14,9 +14,10 @@ public class PersonClient {
 				new ClassPathXmlApplicationContext("config.xml");
 		PersonService person = (PersonService)ctx.getBean("person");
 		
-//		person.insertPerson("park", "박지원");
-//		System.out.println(person.selectPerson("kang11"));
+		//person.insertPerson("kim","김철수");
+		//System.out.println(person.selectPerson("kim"));
 		
+		//업데이트
 		PersonVO vo = new PersonVO();
 		vo.setId("hong123");
 		vo.setName("소지섭");
@@ -26,12 +27,26 @@ public class PersonClient {
 			System.out.println("업데이트 실패");
 		}
 		
-		person.delete("kang11");
-		
+		//삭제
+		person.delete("kang11");		
 		List<PersonVO> list = person.getList();
-		for(PersonVO vo1 : list) {
+		for(PersonVO vo1:list) {
 			System.out.println(vo1);
 		}
-		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

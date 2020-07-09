@@ -12,3 +12,11 @@ public interface BoardService {
 	BoardVO getBoard(int bno);
 	List<BoardVO> getList();
 }
+
+
+
+
+
+
+
+

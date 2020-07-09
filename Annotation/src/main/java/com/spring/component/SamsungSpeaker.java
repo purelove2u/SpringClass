@@ -2,7 +2,7 @@ package com.spring.component;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("samsung")
 public class SamsungSpeaker implements Speaker {
 	
 	public SamsungSpeaker() {

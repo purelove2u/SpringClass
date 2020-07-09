@@ -16,7 +16,7 @@ public class TimeAspect {
 			return obj;
 		} finally {
 			long end = System.nanoTime();
-			System.out.println("걸린시간 : " + (end - start));
+			System.out.println("걸린시간 : "+(end-start));
 		}
 	}
 }

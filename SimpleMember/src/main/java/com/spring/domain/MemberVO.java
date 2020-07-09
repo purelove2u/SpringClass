@@ -1,5 +1,7 @@
 package com.spring.domain;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.Data;
 
 @Data

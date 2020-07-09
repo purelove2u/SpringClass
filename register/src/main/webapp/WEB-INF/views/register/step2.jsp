@@ -12,10 +12,10 @@ pageEncoding="UTF-8"%>
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-    <!-- validation 사용자 작성 코드 삽입-->
-    <script src="/resources/js/join.js"></script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<!-- validation 사용자 작성 코드 삽입-->
+<script src="/resources/js/join.js"></script>   
 <script>
 $(function(){
 	let gender = '${vo.gender}';    	
@@ -81,9 +81,9 @@ $(function(){
               id="name"
               class="form-control"
               placeholder="이름을 입력하세요"
-              value="${vo.username}"
+              value="${vo.name}"
             />
-            <small id="username" class="text-info"></small>
+            <small id="name" class="text-info"></small>
           </div>
         </div>
         <div class="form-group row justify-content-center">

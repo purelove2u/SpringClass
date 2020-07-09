@@ -2,28 +2,33 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<!-- 스프링에서 관리하는 객체 : bean  -->
+	
+	<!-- 스프링에서 관리하는 객체 : bean -->
+	<!--  new SamsungTV()와 같은 역할 -->
 	<bean id="tv" class="com.spring.basic.SamsungTV"/>
+	<bean id="msg" class="com.spring.basic.MessageBean"/>
 	
 	<!-- di에서 필요한 객체 -->
-	<!-- Setter Injection : set 메소드를 통한 주입 -->
+	<!-- Setter Injection : set메소드를 통한 주입 -->
 	<bean id="tv2" class="com.spring.di.SamsungTV">
 		<property name="speaker" ref="samsung"/>
 		<property name="price" value="300000"/>		
 	</bean>
+	<bean id="sony" class="com.spring.di.SonySpeaker"/>
+	<bean id="samsung" class="com.spring.di.SamsungSpeaker"/>
 	
-	<!-- constructor Injection : constructor를 통한 주입 -->
+	<!-- Constructor Injection : 생성자를 통한 주입 -->
 	<bean id="tv3" class="com.spring.di.LgTV">
-		<constructor-arg ref="samsung"/>
+		<constructor-arg ref="sony"/>
 		<constructor-arg value="200000"/>
 	</bean>
 	
-	<bean id="sony" class="com.spring.di.SonySpeaker"></bean>
-	<bean id="samsung" class="com.spring.di.SamsungSpeaker"></bean>
-	
-	<bean id="msg" class="com.spring.di.MessageBean">
-		<constructor-arg value="hong"></constructor-arg>
-		<constructor-arg value="Hello"></constructor-arg>
+	<bean id="msg2" class="com.spring.di.MessageBean">
+		<constructor-arg value="hong"/>
+		<constructor-arg value="Hello"/>
 	</bean>
 </beans>
+
+
+
+

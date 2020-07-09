@@ -22,6 +22,7 @@ public class RegisterController {
 	@Autowired
 	private RegisterService service;
 	
+	
 	@GetMapping("/step1")
 	public void step1Get() {
 		// step1 페이지 보여주기
@@ -47,7 +48,7 @@ public class RegisterController {
 		log.info(""+regist);
 		
 		if(regist.isPasswordEqualToConfirmPassword()) {
-			// step3.jsp 보여주기
+			// step3.jsp 보여주기			
 			if(service.regist(regist)) {
 				log.info("회원가입 성공");
 				return "/register/step3";
@@ -68,11 +69,11 @@ public class RegisterController {
 	}
 	
 	@PostMapping("/checkId")
-	@ResponseBody //리턴값이 경로가 아닌 결과 값으로 던지는 것이라고 알려주는 것. 이건 jsp가 아니다
+	@ResponseBody   //컨트롤러에서 던지는 값이 jsp값이 아님을 의미
 	public String checkId(String userid) {
-		log.info("중복아이디 검사 : " + userid);
+		log.info("중복 아이디 검사 : "+userid);
 		if(service.dupId(userid)) {
-			return "true";	
+			return "true";
 		}else {
 			return "false";
 		}

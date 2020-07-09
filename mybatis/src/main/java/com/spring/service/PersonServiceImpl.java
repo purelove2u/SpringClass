@@ -16,23 +16,41 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	public void insertPerson(String id, String name) {
-		System.out.println(mapper.insertPerson(id, name) == 0? "실패" : "성공");
+		System.out.println(mapper.insertPerson(id, name)==0?"실패":"성공");
 	}
+
 	@Override
-	public String selectPerson(String id) {
+	public String selectPerson(String id) {		
 		return mapper.selectPerson(id);
 	}
+
 	@Override
-	public List<PersonVO> getList() {
+	public List<PersonVO> getList() {		
 		return mapper.selectPersons();
 	}
+
 	@Override
-	public boolean update(PersonVO vo) {
-		return mapper.updatePerson(vo) == 1 ? true:false;
+	public boolean update(PersonVO vo) {		
+		return mapper.updatePerson(vo)==1?true:false;
 	}
+
 	@Override
-	public boolean delete(String id) {
-		return mapper.deletePerson(id) == 1 ? true:false;
+	public boolean delete(String id) {		
+		return mapper.deletePerson(id)==1?true:false;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

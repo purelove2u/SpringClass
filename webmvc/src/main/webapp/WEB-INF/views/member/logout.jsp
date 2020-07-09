@@ -8,8 +8,7 @@
 </head>
 <body>
 	<h1>Logout</h1>
-	<!-- 사용자의 id 출력 -->
-	<h3>ID : ${vo.userid}</h3>
-	<h3>PW : ${vo.password}</h3>
+	<%-- 사용자의 아이디 출력 --%>
+	<h3>${loginVO.userid}</h3>
 </body>
 </html>

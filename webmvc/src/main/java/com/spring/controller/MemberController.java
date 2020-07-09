@@ -31,36 +31,36 @@ public class MemberController {
 //	@DeleteMapping("/login")
 	
 	
-	@GetMapping("/login")
+	@GetMapping("/login") //http://localhost:8080/member/login
 	public void login() {
 		log.info("login 폼 요청");
 	}
 	
-//	@PostMapping("/login")
-//	public void loginPost(HttpServletRequest req){
+//	@PostMapping("/login") //http://localhost:8080/member/login
+//	public void loginPost(HttpServletRequest req) {
 //		log.info("login 요청");
 //		
 //		//사용자가 보낸 값 가져오기
-//		log.info("userid : " + req.getParameter("userid"));
-//		log.info("password : " + req.getParameter("password"));
+//		log.info("userid:"+req.getParameter("userid"));
+//		log.info("password:"+req.getParameter("password"));
 //	}
 	
-//	@PostMapping("/login")
-//	public void loginPost(@RequestParam("userid") String id, String password){
+//	@PostMapping("/login") //http://localhost:8080/member/login
+//	public void loginPost(@RequestParam("userid") String id,String password) {
 //		log.info("login 요청");
 //		
 //		//사용자가 보낸 값 가져오기
-//		log.info("userid : " + id);
-//		log.info("password : " + password);
+//		log.info("userid:"+id);
+//		log.info("password:"+password);
 //	}
-//	
-	@PostMapping("/login")
-	public String loginPost(@ModelAttribute("vo") LoginVO login){
+	
+	@PostMapping("/login") //http://localhost:8080/member/login
+	public String loginPost(LoginVO login) {
 		log.info("login 요청");
 		
 		//사용자가 보낸 값 가져오기
-		log.info("userid : " + login.getUserid());
-		log.info("password : " + login.getPassword());
+		log.info("userid:"+login.getUserid());
+		log.info("password:"+login.getPassword());
 		
 		//logout.jsp 보여주기
 		return "member/logout";
@@ -75,43 +75,49 @@ public class MemberController {
 	@RequestMapping("/register")
 	public void register() {
 		log.info("register 폼 요청");
-	}
+	}	
 	
 	@PostMapping("/register")
 	public void registerPost(RegisterVO vo) {
 		log.info("register 요청");
-		
 		//사용자로부터 정보 가져오기
-		log.info("userid : " + vo.getUserid());
-		log.info("password : " + vo.getPassword());
-		log.info("confirm_password : " + vo.getConfirm_password());
-		log.info("mobile : " + vo.getMobile());
+		log.info("userid : "+vo.getUserid());
+		log.info("password : "+vo.getPassword());
+		log.info("confirm_password : "+vo.getConfirm_password());
+		log.info("mobile : "+vo.getMobile());		
 	}
 	
-	
-	// update.jsp 보여주는 컨트롤러 생성하기
+	//update.jsp 보여주는 컨트롤러 생성하기
 	@GetMapping("/update")
 	public void update() {
 		log.info("update 폼 요청");
 	}
+	
 //	@PostMapping("/update")
-//	public void updatePost(String userid, String password, Model model) {
+//	public void updatePost(String userid,String password,Model model) {
 //		log.info("update 요청");
 //		model.addAttribute("userid", userid);
 //		model.addAttribute("password", password);
 //	}
-
+	
 	@PostMapping("/update")
-	public void updatePost(@ModelAttribute("userid") String userid, 
-			@ModelAttribute("password") String password) {
-		log.info("update 요청");
+	public void updatePost(@ModelAttribute("userid") String userid,	String password) {
+		log.info("update 요청");		
 	}
-	// @ModelAttribute : 도메인 객체의 이름 지정
-	//					Model 의 역할을 함
 	
-	
-	
+	//@ModelAttribute : 도메인 객체의 이름 지정
+	//                  Model 의 역할을 함
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

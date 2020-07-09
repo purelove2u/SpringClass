@@ -27,7 +27,15 @@
 		</div>
 		<div>
 			<button>전송</button>
-		</div>
+		</div>	
 	</form>
 </body>
 </html>
+
+
+
+
+
+
+
+

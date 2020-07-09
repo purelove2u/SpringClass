@@ -4,13 +4,17 @@ import org.springframework.stereotype.Component;
 
 @Component("forc")
 public class ForCalculator implements Calculator {
+	
 	@Override
 	public long factorial(long num) {
-		// for 문으로 구하는 factorial
+		// for문으로 구하는 factorial		
 		long result = 1;
-		for(int i = 1; i <= num; i++) {
-			result = result * i;
-		}
+		for(int i=1; i<=num; i++) {
+			result*=i;   //5! = 5*4*3*2*1
+		}				
 		return result;
 	}
 }
+
+
+

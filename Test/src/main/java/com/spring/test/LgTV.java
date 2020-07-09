@@ -1,16 +1,19 @@
 package com.spring.test;
 
 public class LgTV implements TV{
-	private Speaker speaker;
 	
+	private Speaker speaker;
+		
 	public LgTV() {
-		super();
-	}
+		super();		
+	}	
 	
 	public LgTV(Speaker speaker) {
 		super();
 		this.speaker = speaker;
 	}
+
+
 
 	@Override
 	public void powerOn() {
@@ -22,13 +25,12 @@ public class LgTV implements TV{
 	}
 	@Override
 	public void volumeUp() {
-//		System.out.println("LGTV - 볼륨 up");		
+		//System.out.println("LGTV - 볼륨 Up");	
 		speaker.volumeUp();
 	}
 	@Override
 	public void volumeDown() {
-//		System.out.println("LGTV - 볼륨 Down");		
+		//System.out.println("LGTV - 볼륨 Down");	
 		speaker.volumeDown();
 	}
-	
 }

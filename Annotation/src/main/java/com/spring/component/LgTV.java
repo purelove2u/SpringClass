@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("tv")	 //객체 생성
+@Component("tv")  //객체생성
 public class LgTV implements TV{
 	
-	@Autowired
-	@Qualifier("samsungSpeaker")	//객체 주입
+	@Autowired //객체 주입
+	@Qualifier("sony")
 	private Speaker speaker;
 			
 	public LgTV() {

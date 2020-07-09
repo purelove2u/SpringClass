@@ -12,28 +12,42 @@ import com.spring.persistence.BoardDAO;
 //@Component("board")
 @Service("board")
 public class BoardServiceImpl implements BoardService {
+
 	@Autowired
 	private BoardDAO dao;
 	
 	@Override
-	public int insertBoard(BoardVO vo) {
+	public int insertBoard(BoardVO vo) {		
 		return dao.insertArticle(vo);
 	}
+
 	@Override
 	public int updateBoard(BoardVO vo) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	@Override
 	public int deleteBoard(BoardVO vo) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	@Override
 	public BoardVO getBoard(int bno) {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public List<BoardVO> getList() {
+	public List<BoardVO> getList() {		
 		return dao.getList();
 	}
 
 }
+
+
+
+
+
+

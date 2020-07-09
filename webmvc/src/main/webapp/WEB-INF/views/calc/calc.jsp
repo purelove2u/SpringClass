@@ -11,14 +11,23 @@
 		<div>
 			<input type="text" name="num1"/>
 			<select name="op" id="">
-				<option value="+"> + </option>
-				<option value="-"> - </option>
-				<option value="*"> * </option>
-				<option value="/"> / </option>
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="/">/</option>
+				<option value="*">*</option>
 			</select>
 			<input type="text" name="num2"/>
-			<input type="submit" name="계산"/>
+			<input type="submit" value="계산" />
 		</div>
 	</form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

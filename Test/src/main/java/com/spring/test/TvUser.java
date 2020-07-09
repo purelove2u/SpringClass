@@ -1,6 +1,6 @@
 package com.spring.test;
 
-public class TvUser {
+public class TVUser {
 	public static void main(String[] args) {
 //		LgTV lg = new LgTV();
 //		lg.turnOn();
@@ -8,13 +8,17 @@ public class TvUser {
 //		lg.soundDown();
 //		lg.turnOff();
 		
-//		TV samsung = new LgTV(new SonySpeaker());
+		//TV tv = new LgTV(new SonySpeaker());
 		SamsungTV tv = new SamsungTV();
 		tv.setSpeaker(new SonySpeaker());
 		tv.powerOn();
 		tv.volumeUp();
 		tv.volumeDown();
 		tv.powerOff();
-		
-	}	
+	}
 }
+
+
+
+
+
