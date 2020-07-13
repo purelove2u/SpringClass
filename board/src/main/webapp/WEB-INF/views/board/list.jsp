@@ -32,9 +32,9 @@
 								<tbody>
 								<!-- 게시판 리스트 반복문 -->
 									<c:forEach var="vo" items="${list}">
-										<tr>
+										<tr>										
 											<td>${vo.bno}</td>
-											<td><a href="read?bno=${vo.bno}">${vo.title}</a></td>
+											<td><a href='<c:out value="${vo.bno}"/>' class="move">${vo.title}</a></td>
 											<td>${vo.writer}</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate}"/></td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.updatedate}"/></td>
@@ -45,10 +45,30 @@
 							<div class="row"> <!-- start search -->
                             	<div class="col-md-12">
                             	  <div class="col-md-8"><!--search Form-->
-                            		
-                            	   </div>
-                            	   <div class="col-md-2 col-md-offset-2">
+                            		<form action="" id="searchForm">
+                            			<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+                            			<input type="hidden" name="amount" value="${cri.amount}"/>
+                            			<select name="type" id="">
+                            				<option value="" <c:out value="${empty cri.type?'selected':''}"/>>------</option>
+                            				<option value="T" <c:out value="${cri.type=='T'?'selected':''}"/>>제목
+                            				<option value="C" <c:out value="${cri.type=='C'?'selected':''}"/>>내용</option>
+                            				<option value="W" <c:out value="${cri.type=='W'?'selected':''}"/>>작성자</option>
+                            				<option value="TC" <c:out value="${cri.type=='TC'?'selected':''}"/>>제목 or 내용</option>
+                            				<option value="TW" <c:out value="${cri.type=='TW'?'selected':''}"/>>제목 or 작성자</option>
+                            				<option value="TCW" <c:out value="${cri.type=='TCW'?'selected':''}"/>>제목 or 내용 or 작성자</option>
+                            			</select>
+                            			<input type="text" name="keyword" value="${cri.keyword}"/>
+                            			<button class="btn btn-default" type='button'>검색</button>                            			
+                            		</form>
+                            	  </div>
+                            	  <div class="col-md-2 col-md-offset-2">
                             	   	<!--페이지 목록 갯수 지정하는 폼-->
+                            	   	<select class="form-control" name="amount">
+                            	   		<option value="10" <c:out value="${criteria.amount == 10?'selected':''}"/>>10</option>
+                            	   		<option value="20" <c:out value="${criteria.amount == 20?'selected':''}"/>>20</option>
+                            	   		<option value="30" <c:out value="${criteria.amount == 30?'selected':''}"/>>30</option>
+                            	   		<option value="40" <c:out value="${criteria.amount == 40?'selected':''}"/>>40</option>
+                            	   	</select>
 								  </div>
                              	 </div>                             	 
                       		 </div><!-- end search -->
@@ -75,9 +95,11 @@
                 </div>               
             <!-- /.row -->
 <%-- 페이지번호를 누르면 동작하는 폼 --%>
-<form action="list" id="actionForm">
+<form action="list" id="actionForm">	
 	<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${pageVO.cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" /> <!-- pageVO.cri.type -->
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>
 <!-- 모달 추가 -->
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
@@ -122,10 +144,49 @@ $(function(){
 	$(".paginate_button a").click(function(e){
 		// a 태그의 동작 막기
 		e.preventDefault();
-	    // 전송해야 할 폼 가져온 후 pageNum 의 값과 amount 값을 변경한 후
+	    // 전송해야 할 폼 가져온 후 pageNum 의 값을 변경한 후
 	    actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 	    // 폼 전송하기
 		actionForm.submit();
+	})
+	
+	$(".form-control").change(function(){
+		 // 전송해야 할 폼 가져온 후  amount 값을 변경한 후
+		 actionForm.find("input[name='amount']").val($(this).val());
+		 // 폼 전송하기
+		 actionForm.submit();
+	})
+	
+	//타이틀 클릭시 페이지나누기 정보가 있는 폼 보내기
+	$(".move").click(function(e){
+		// 37번줄에
+		// <a href="read?bno=${vo.bno}&pageNum=${cri.pageNum}&amount=${cri.amount}">${vo.title}</a>
+		// 이렇게 작성하는 부분 대체
+		e.preventDefault();
+		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'/>");
+		actionForm.attr('action','read');
+		actionForm.submit();
+	})
+	
+	// 검색 버튼 클릭시 동작하는 스크립트
+	$(".btn-default").click(function(){
+		let searchForm = $("#searchForm");
+		
+		//type과 keyword가 비어 있는지 확인하고
+		//비어 있으면 메세지 띄워준 후 return
+		let type = $("select[name='type']").val();
+		let keyword = $("input[name='keyword']").val();
+		
+		if(type === ''){
+			alert('검색 기준을 입력해 주세요');
+			return false;
+		}else if(keyword === ''){
+			alert('검색어를 입력해 주세요');
+			return false;
+		}
+		//모두 입력이 된 경우 폼 전송
+		searchForm.find("input[name='pageNum']").val("1");
+		searchForm.submit();
 	})
 	
 	

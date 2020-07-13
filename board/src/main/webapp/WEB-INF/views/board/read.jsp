@@ -44,7 +44,10 @@
 <%-- 페이지 나누기와 다른작업들을 위해서 폼 작성 --%>
 <form action="" id="myForm">
 	<input type="hidden" name="bno" value="${vo.bno}"/>
-	<input type="hidden" name="" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
 </form>    
 <script>
 $(function(){

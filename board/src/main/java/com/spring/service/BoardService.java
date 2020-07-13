@@ -12,7 +12,7 @@ public interface BoardService {
 	boolean deleteBoard(int bno);
 	BoardVO getBoard(int bno);
 	List<BoardVO> getList(Criteria cri);
-	int totalRows();
+	int totalRows(Criteria cri);
 }
 
 
