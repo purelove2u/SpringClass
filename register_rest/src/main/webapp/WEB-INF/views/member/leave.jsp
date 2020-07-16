@@ -47,10 +47,10 @@ $(function(){
 		// 폼안의 데이터를 json 형태로 서버로 보내기
 		// 입력 후 결과를 받아 출력하기
 		$.ajax({
-			url : '/register/leave',
+			url : 'leave', // http://localhost:8080/member/leave => 
 			type : 'delete',
 			contentType : 'application/json',
-			data : JSON.stringify(param),
+			data : JSON.stringify(param),			
 			success:function(data){
 				alert(data);
 				location.href='/';
@@ -60,6 +60,8 @@ $(function(){
 				let msg = xhr.responseText;
 				if(msg === 'fail'){
 					alert('현재 비밀번호를 확인해 주세요');
+					$("#current_password").val("");
+					$("#current_password").focus();
 				}
 			}
 		})

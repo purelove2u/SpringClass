@@ -3,7 +3,7 @@ package com.spring.resource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TVUser {
+public class TvUser {
 	public static void main(String[] args) {
 	
 		System.out.println("IoC 컨테이너 구동 전");

@@ -16,7 +16,7 @@
 <div class="card border-success mb-3 mx-auto" style="max-width: 25rem;">
   <div class="card-header">비밀번호 변경</div>
   <div class="card-body">
-  	<form id="changePwd" method="post">
+  	<form>
   			<div class="form-group row">
 	    		<input type="password" class="form-control" size="50" id="password" name="password" placeholder="현재 비밀번호">
 	    		<small id="password" class="text-info"></small>
@@ -39,6 +39,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
 <!-- validation 사용자 작성 코드 삽입-->
 <script src="/resources/js/modify.js"></script>  
+<script>
+$(function(){
+	$("button").click(function(e){
+		e.preventDefault();
+		//   + put
+		let param = {
+				password : $("#password").val(),
+				new_password : $("#new_password").val(),
+				confirm_password : $("#confirm_password").val()
+		};
+		$.ajax({
+			url : 'changePwd',
+			type : 'put',
+			contentType : 'application/json',
+			data : JSON.stringify(param),
+			success:function(data){
+				if(data === 'success'){
+					alert('비밀번호 변경에 성공했습니다.\n 다시 로그인해 주세요');
+					location.href = "/";
+				}
+			},
+			error:function(xhr,textStatus,error){
+				if(xhr.responseText === 'not equal'){
+					alert('비밀번호가 일치하지 않습니다.');
+					$("#new_password").val("");
+					$("#confirm_password").val("");
+				}else{
+					alert('비밀번호 변경에 실패하였습니다.');
+				}
+			}
+		})
+		
+	})
+})
+</script>
 </body>
 </html>
 

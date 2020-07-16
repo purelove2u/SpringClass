@@ -29,19 +29,19 @@ public class MemberRestController {
 	private MemberService member;
 	// http://localhost:8080/register/step2 => 
 	//       http://localhost:8080/register/insert + post
-	@PostMapping("/insert")
-	public ResponseEntity<String> registerPost(RegisterVO vo) {
-		log.info("회원가입" + vo);
-		return service.regist(vo)?new ResponseEntity<String>("success",HttpStatus.OK):
-			new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
-	}
-	
 //	@PostMapping("/insert")
-//	public ResponseEntity<String> registerPost(@RequestBody RegisterVO vo) {
+//	public ResponseEntity<String> registerPost(RegisterVO vo) {
 //		log.info("회원가입" + vo);
 //		return service.regist(vo)?new ResponseEntity<String>("success",HttpStatus.OK):
 //			new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
 //	}
+	
+	@PostMapping("/insert")
+	public ResponseEntity<String> registerPost(@RequestBody RegisterVO vo) {
+		log.info("회원가입" + vo);
+		return service.regist(vo)?new ResponseEntity<String>("success",HttpStatus.OK):
+			new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
+	}
 	
 	
 }

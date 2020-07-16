@@ -131,7 +131,7 @@ $(function(){
     </div>
 <script>
 $(function(){
-	/* $(".btn-primary").click(function(){
+	$(".btn-primary").click(function(){
 		
 		let userid= $("#userid").val();
 		let password= $("#password").val();
@@ -163,8 +163,8 @@ $(function(){
 				alert(xhr.responseText);
 			}
 		})
-	}) */
-$(".btn-primary").click(function(){						
+	})
+/* $(".btn-primary").click(function(){						
 		// 폼안의 데이터를 서버로 보내기
 		// 입력 후 결과를 받아 출력하기
 		$.ajax({
@@ -178,7 +178,7 @@ $(".btn-primary").click(function(){
 				alert(xhr.responseText);
 			}
 		})
-	})
+	}) */
 })
 
 </script>
