@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.ReplyPageVO;
 import com.spring.domain.ReplyVO;
 import com.spring.service.ReplyService;
 
@@ -28,14 +30,14 @@ public class ReplyCotroller {
 	@Autowired
 	private ReplyService service;
 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/new")  //http://localhost:8080/replies/new + post
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo) {
 		log.info("댓글 등록..."+vo);
 		
 		return service.replyInsert(vo)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
-					new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
-					
+					new ResponseEntity<String>("fail",HttpStatus.INTERNAL_SERVER_ERROR);					
 	}
 	
 	
@@ -47,9 +49,11 @@ public class ReplyCotroller {
 	}
 	
 	//댓글 수정하기  http://localhost:8080/replies/3 + put
+	@PreAuthorize("principal.username == #vo.replyer")
 	@PutMapping("/{rno}")
 	public ResponseEntity<String> modify(@PathVariable("rno") int rno,@RequestBody ReplyVO vo) { 
-		log.info("댓글 수정 : "+rno+" 내용 : "+vo);
+		log.info("댓글 수정 : "+rno+" 내용 : "+vo.getReply()
+		                                 +" 댓글 작성자 : "+vo.getReplyer());
 		
 		//rno를 vo 에 담아주기
 		vo.setRno(rno);
@@ -60,9 +64,11 @@ public class ReplyCotroller {
 	}
 	
 	//댓글 삭제 http://localhost:8080/replies/3 + delete
+	@PreAuthorize("principal.username == #vo.replyer")
 	@DeleteMapping("/{rno}")
-	public ResponseEntity<String> delete(@PathVariable("rno") int rno) { 
-		log.info("댓글 삭제 : "+rno);
+	public ResponseEntity<String> delete(@PathVariable("rno") int rno,
+			@RequestBody ReplyVO vo) { 
+		log.info("댓글 삭제 : "+rno+" 댓글 작성자 "+vo.getReplyer());
 		
 		return service.replyDelete(rno)? 
 				new ResponseEntity<String>("success",HttpStatus.OK):
@@ -73,13 +79,13 @@ public class ReplyCotroller {
 	// http://localhost:8080/replies/pages/{1042}/{1}
 	//  1042번에 해당하는 첫번째 페이지 댓글 가져오기
 	@GetMapping("/pages/{bno}/{page}")
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("bno") int bno,
+	public ResponseEntity<ReplyPageVO> getList(@PathVariable("bno") int bno,
 			@PathVariable("page") int page){
 		log.info("댓글 가져오기 "+bno+" page = "+page);
 		
 		Criteria cri = new Criteria(page,10);
 		
-		return new ResponseEntity<List<ReplyVO>>(service.replyList(cri, bno),HttpStatus.OK);
+		return new ResponseEntity<ReplyPageVO>(service.replyList(cri, bno),HttpStatus.OK);
 	}
 	
 }

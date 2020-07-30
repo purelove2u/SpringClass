@@ -12,7 +12,31 @@ primary key(bno);
 
 create sequence seq_board;
 
-select * from spring_board;
+select * from spring_board order by bno desc;
+
+-- 댓글 수 컬럼 추가
+alter table spring_board add(replycnt number default 0);
+
+-- 기존 댓글 수 업데이트
+update spring_board set replycnt = (select count(*) 
+									from spring_reply 
+									where spring_reply.bno = SPRING_BOARD.bno);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

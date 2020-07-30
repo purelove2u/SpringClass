@@ -3,7 +3,7 @@ package com.spring.autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TvUser {
+public class TVUser {
 	public static void main(String[] args) {
 	
 		System.out.println("IoC 컨테이너 구동 전");

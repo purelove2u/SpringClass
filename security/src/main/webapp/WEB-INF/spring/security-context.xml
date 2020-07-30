@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- <security:form-login/> :  UsernamePasswordAuthenticationFilter(post)
+	 / DefaultLoginPageGeneratingFilter(get) : 만들어진 로그인 폼 페이지가 없는 경우
+	   동작-->
+
+	<bean id="customHandler" class="com.spring.handler.CustomAccessDeniedHandler"/>
+	<bean id="loginSuccessHandler" class="com.spring.handler.CustomLoginSuccessHandler"/>
+	
+	<!-- 패스워드인코더 -->
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!-- 인증정보제공자 -->
+	<bean id="userDetail" class="com.spring.service.CustomUserDetailService"/>
+	
+	<security:http>		
+		<!-- remember-me -->
+		<security:remember-me data-source-ref="ds" token-validity-seconds="604800"/>
+		<!-- 특정한 URI에 접근할 때 인터셉터 동작시키기 : FilterSecurityInterceptor -->
+		<security:intercept-url pattern="/security/all" access="permitAll"/>		
+		<security:intercept-url pattern="/security/member" access="hasRole('ROLE_MEMBER')"/>		
+		<security:intercept-url pattern="/security/admin" access="hasRole('ROLE_ADMIN')"/>
+		<!-- 권한이 없는 URI에 접근하는 경우 동작하는 컨트롤러 작성 -->
+		<!-- <security:access-denied-handler error-page="/accessError"/>	 -->	
+		<!-- 권한이 없는 URI에 접근시 동작하는 핸들러 작성 -->
+		<security:access-denied-handler ref="customHandler"/>
+		<security:form-login login-page="/security/login" authentication-success-handler-ref="loginSuccessHandler"/>
+		<security:logout logout-success-url="/" invalidate-session="true"/>
+	</security:http>	
+	
+	<!-- 사용자 인증 : DB(mybatis) -->
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userDetail">					
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>	
+	</security:authentication-manager> 
+	
+	
+	<!-- 사용자 인증을 DB를 이용할 때 -->
+	<!-- <security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="ds" 
+			users-by-username-query="select userid,userpw,enabled from spring_member where userid=?"
+			authorities-by-username-query="select userid,auth from spring_member_auth where userid=?"/>			
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>	
+	</security:authentication-manager>	 -->
+	
+	<!-- 사용자 인증을 in-memory 방식으로 할 때 
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>비밀번호는 무조건 암호화가 필요
+				<security:user name="user1" password="{noop}user1" authorities="permitAll"/>
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER,ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager> -->
+</beans>
+
+
+
+
+
+
+
+
+
+

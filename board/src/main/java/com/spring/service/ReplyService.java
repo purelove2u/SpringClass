@@ -3,6 +3,7 @@ package com.spring.service;
 import java.util.List;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.ReplyPageVO;
 import com.spring.domain.ReplyVO;
 
 /* 변수명, 메소드명 규칙(카멜케이스)
@@ -17,7 +18,7 @@ public interface ReplyService {
 	public ReplyVO replyRead(int rno);
 	public boolean replyUpdate(ReplyVO vo);
 	public boolean replyDelete(int rno);
-	public List<ReplyVO> replyList(Criteria cri,int bno);
+	public ReplyPageVO replyList(Criteria cri,int bno);
 }
 
 

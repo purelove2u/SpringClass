@@ -1,7 +1,10 @@
 package com.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,9 +27,25 @@ public class PartnerController {
 	}
 	
 	@PostMapping("/partner/register")
-	public void registerPost(PartnerVO vo) {
+	public String registerPost(PartnerVO vo) {
 		log.info("파트너 정보 입력 요청"+vo);
 		service.insert(vo);
+		//return "/exam/test";
+		return "redirect:list";
+	}
+	
+	@GetMapping("/partner/list")
+	public void list(Model model) {
+		log.info("리스트 요청");
+		List<PartnerVO> list = service.list();
+		model.addAttribute("list", list);
+	}
+	
+	
+	
+	@GetMapping("/exam/test")  //    WEB-INF/view/exam/test.jsp
+	public void test() { 
+		log.info("test 요청");
 	}
 }
 
